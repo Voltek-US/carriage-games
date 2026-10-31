@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#151a2e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Carriage Games">
+<title>Carriage Games</title>
+<style>
+:root{--ground:#151a2e;--surface:#1e2440;--line:#3a4270;--ink:#ece7da;--muted:#9aa0bf;--p0:#f4b13e;--p1:#4fd1c5;--ok:#7bd88f;color-scheme:dark}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Roboto,sans-serif;
+ padding:calc(24px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+main{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+h1{font:800 30px/1.1 ui-rounded,system-ui,sans-serif;margin:0;text-wrap:balance}
+p{margin:0;color:var(--muted)}
+.dots{display:flex;gap:6px}.dots b{width:12px;height:12px;border-radius:50%;background:var(--p0)}.dots b+b{background:var(--p1)}
+a.card{display:flex;flex-direction:column;gap:4px;background:var(--surface);border-radius:16px;padding:18px;color:var(--ink);text-decoration:none}
+a.card strong{font:700 19px/1.2 ui-rounded,system-ui,sans-serif}
+a.card:active{transform:scale(.99)}
+.note{border:1.5px dashed var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.note b{color:var(--ink)} #st{font-weight:600}
+#st.ok{color:var(--ok)}
+</style></head><body><main>
+<div class="dots"><b></b><b></b></div>
+<h1>Carriage Games</h1>
+<p>Play phone to phone over a hotspot. No internet needed once it's saved.</p>
+<a class="card" href="games.html"><strong>Game hub</strong><p>Connect 4, Battleship, Dots &amp; Boxes, Word Duel</p></a>
+<a class="card" href="chess.html"><strong>Chess</strong><p>Full rules, with legal moves highlighted</p></a>
+<div class="note"><p id="st">Saving for offline use…</p>
+<p><b>iPhone:</b> tap Share, then Add to Home Screen. Open it once from the home screen while you still have internet.</p>
+<p><b>Android:</b> Chrome menu, then Add to Home screen.</p></div>
+</main>
+<script>
+var st=document.getElementById('st');
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(function(){return navigator.serviceWorker.ready;}).then(function(){st.textContent='Saved. Works offline on this phone.';st.className='ok';}).catch(function(){st.textContent='Could not save for offline use. Keep this tab open instead.';});}
+else st.textContent='This browser cannot save pages for offline use.';
+</script>
+</body></html>
